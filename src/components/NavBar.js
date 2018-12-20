@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5FCFF",
     borderWidth: 2,
-    top: "5%",
     backgroundColor: "#41f471"
   },
   TextInput: {
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   buttonStyle: {
-    flex: 1,
     borderWidth: 1,
     borderRadius: 5,
     backgroundColor: '#ffffff'

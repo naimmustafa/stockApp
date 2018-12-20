@@ -1,20 +1,23 @@
 import React, { Component } from "react";
-import { TextInput, StyleSheet, View, Button } from "react-native";
-import NavBar from './components/NavBar';
+import { TextInput, StyleSheet, View, Button, Text } from "react-native";
+import NavBar from "./components/NavBar";
+import Card from './components/card/CardContainer';
 
 export default class Main extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <NavBar />
+        <Card />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  searchContainer: {
+  container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: "column",
+    top: "5%"
   }
 });
