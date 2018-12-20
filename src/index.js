@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import { StyleSheet, SafeAreaView, View, Text } from "react-native";
 import NavBar from "./components/NavBar";
 import Feed from './components/feed/Feed';
 
@@ -10,6 +10,7 @@ export default class Main extends Component {
       <View style={styles.innerContainer}>
         <NavBar />
         <Feed />
+        <Text>Last Updated: 10 sec ago</Text>
         </View>
       </SafeAreaView>
     );
