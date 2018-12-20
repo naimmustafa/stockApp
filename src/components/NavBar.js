@@ -12,13 +12,13 @@ export default class NavBar extends Component {
     return (
       <View style={styles.searchContainer}>
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text>Menu</Text>
+          <Text style={styles.text} >Menu</Text>
         </TouchableOpacity>
 
         <TextInput placeholder="Search..." style={styles.TextInput} />
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text>Log in</Text>
+          <Text style={styles.text} >Log in</Text>
         </TouchableOpacity>
       </View>
     );
@@ -30,35 +30,39 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#8fad93",
+    backgroundColor: "#213B51",
     borderBottomWidth: 2,
-    paddingTop: 20,
-    paddingBottom: 10,
+    borderColor: 'white',
+    paddingTop: 5,
+    paddingBottom: 5,
     paddingRight: "5%",
     paddingLeft: "5%"
   },
   TextInput: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: "center",
     margin: 10,
     backgroundColor: "#ffffff",
-    width: "60%",
+    width: "55%",
+    padding: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2
   },
-
   buttonStyle: {
     justifyContent: "center",
     width: 50,
-    height: 50,
+    height: 35,
     alignItems: "center",
-    borderRadius: 25,
-    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    backgroundColor: "#969E9D",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2
+  },
+  text: {
+    color: 'white'
   }
 });

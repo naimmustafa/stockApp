@@ -7,6 +7,10 @@ export default class Feed extends Component {
     return (
       <View style={styles.feedContainer}>
         <Example />
+        <Example />
+        <Example />
+        <Example />
+        <Example />
       </View>
     );
   }

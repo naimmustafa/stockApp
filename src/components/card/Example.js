@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, ActivityIndicator } from "react-native";
 import Card from "./Card";
 import CardSection from "./CardSection";
 
@@ -15,7 +15,7 @@ const Example = () => {
       </CardSection>
 
       <CardSection>
-        <Text>Hello</Text>
+        <ActivityIndicator size="small" color="#0000ff" />
       </CardSection>
     </Card>
   );
