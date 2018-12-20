@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import CardSection from './CardSection';
+import Example from "../card/Example";
 
-export default class Card extends Component {
+export default class Feed extends Component {
   render() {
     return (
-        <View style={styles.feedContainer}>
-          <CardSection />
-          <CardSection />
-          <CardSection />
-        </View>
+      <View style={styles.feedContainer}>
+        <Example />
+      </View>
     );
   }
 }

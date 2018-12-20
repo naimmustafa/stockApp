@@ -1,22 +1,20 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React from "react";
+import { View, StyleSheet } from "react-native";
 
-export default class CardSection extends Component {
-  render() {
-    return (
-          <View style={styles.cardStyle}>
-            <Text>yey</Text>
-          </View>
-    );
-  }
-}
+const CardSection = props => {
+  return <View style={styles.containerStyle}>{props.children}</View>
+};
 
-const styles = StyleSheet.create({
-  cardStyle: {
-    marginTop: 10,
-    width: "95%",
-    height: 100,
+const styles = {
+  containerStyle: {
     borderWidth: 1,
-    alignItems: "center"
+    padding: 5,
+    backgroundColor: '#f2f9f3',
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    borderColor: "#ddd",
+    position: "relative"
   }
-});
+};
+
+export default CardSection;
