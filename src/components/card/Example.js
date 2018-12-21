@@ -6,20 +6,10 @@ import CardSection from "./CardSection";
 
 class Example extends Component {
   render() {
-    console.log(this.props);
-    const { searchText } = this.props;
     return (
       <Card>
         <CardSection>
-          <Text>{searchText}</Text>
-        </CardSection>
-
-        <CardSection>
-          <Text>World!</Text>
-        </CardSection>
-
-        <CardSection>
-          <ActivityIndicator size="small" color="#0000ff" />
+          <Text>text</Text>
         </CardSection>
       </Card>
     );
