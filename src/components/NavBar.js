@@ -7,18 +7,31 @@ import {
   TouchableOpacity
 } from "react-native";
 
-export default class NavBar extends Component {
+import { connect } from "react-redux";
+import { searchText } from "../redux/actions";
+
+class NavBar extends Component {
+  onTextChange(text) {
+    this.props.searchText(text);
+  }
+
   render() {
+    console.log(this.props.search)
     return (
       <View style={styles.searchContainer}>
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text style={styles.text} >Menu</Text>
+          <Text style={styles.text}>Menu</Text>
         </TouchableOpacity>
 
-        <TextInput placeholder="Search..." style={styles.TextInput} />
+        <TextInput
+          placeholder="Search..."
+          style={styles.TextInput}
+          onChangeText={this.onTextChange.bind(this)}
+          value={this.props.search}
+        />
 
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text style={styles.text} >Log in</Text>
+          <Text style={styles.text}>Log in</Text>
         </TouchableOpacity>
       </View>
     );
@@ -32,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#213B51",
     borderBottomWidth: 2,
-    borderColor: 'white',
+    borderColor: "white",
     paddingTop: 5,
     paddingBottom: 5,
     paddingRight: "5%",
@@ -63,6 +76,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   },
   text: {
-    color: 'white'
+    color: "white"
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    search: state.search.search
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  searchText: text => dispatch(searchText(text))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar);

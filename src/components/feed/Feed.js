@@ -1,19 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, ScrollView, Text } from "react-native";
 import Example from "../card/Example";
+import { connect } from "react-redux";
 
-export default class Feed extends Component {
+class Feed extends Component {
   render() {
+    const { search } = this.props;
     return (
       <ScrollView style={styles.feedContainer}>
-        <Example />
-        <Example />
-        <Example />
-        <Example />
-        <Example />
-        <Example />
-        <Example />
-        <Example />
+        <Example searchText={search} />
       </ScrollView>
     );
   }
@@ -22,6 +17,17 @@ export default class Feed extends Component {
 const styles = StyleSheet.create({
   feedContainer: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "column"
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    search: state.search.search
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Feed);
