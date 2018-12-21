@@ -7,12 +7,12 @@ const CardSection = props => {
 
 const styles = {
   containerStyle: {
-    borderWidth: 1,
     padding: 5,
+    borderBottomWidth: 1,
     backgroundColor: '#F8F9F7',
-    justifyContent: "flex-start",
+    justifyContent: "center",
     flexDirection: "row",
-    borderColor: "#ddd",
+    borderColor: "black",
     position: "relative"
   }
 };
