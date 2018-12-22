@@ -29,7 +29,10 @@ class NavBar extends Component {
           value={this.props.search}
         />
 
-        <TouchableOpacity style={styles.buttonStyle}>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => this.props.openModal()}
+        >
           <Text style={styles.text}>Log in</Text>
         </TouchableOpacity>
       </View>

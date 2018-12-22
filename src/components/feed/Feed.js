@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   View
 } from "react-native";
-import Example from "../card/Example";
+import CryptoList from "../card/CryptoList";
 import { connect } from "react-redux";
 import { getCryptos, refreshCryptos } from "../../redux/actions/index";
 
@@ -18,7 +18,7 @@ class Feed extends Component {
 
   renderCryptoList() {
     return this.props.cryptos.map(crypto => (
-      <Example key={crypto.symbol} crypto={crypto} />
+      <CryptoList key={crypto.symbol} crypto={crypto} />
     ));
   }
 
@@ -27,13 +27,13 @@ class Feed extends Component {
     if (loading) {
       return (
         <View style={styles.spinerContainer}>
-          <ActivityIndicator size="large" color="#0000ff" />
-          <Text>{text}</Text>
+          <ActivityIndicator size={75} color="#213B51" />
+          <Text style={styles.textStyle}>{text}</Text>
         </View>
       );
     }
     return (
-      <ScrollView style={styles.feedContainer}>
+      <ScrollView style={styles.feedContainer}  >
         <Text style={styles.textStyle}>Crypto Currencies</Text>
         {this.renderCryptoList()}
       </ScrollView>
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "black",
     fontSize: 15,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginTop: 10
   }
 });
 

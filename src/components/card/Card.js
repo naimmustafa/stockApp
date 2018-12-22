@@ -14,11 +14,12 @@ const styles = StyleSheet.create({
     shadowOffset:  {width: 1,height: 2},
     shadowOpacity: 0.5,
     shadowRadius: 2,
+    alignSelf: 'center',
     width: '95%',
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10
+    marginTop: 20
   }
 });
 

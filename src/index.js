@@ -1,13 +1,28 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, View, Text } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  Modal,
+  TouchableHighlight
+} from "react-native";
 import NavBar from "./components/NavBar";
 import Feed from "./components/feed/Feed";
 import { connect } from "react-redux";
 import { countdown } from "./redux/actions/index";
 
 class Main extends Component {
+  state = {
+    modalVisible: false
+  };
+
   componentWillMount() {
     this.props.countdownAction();
+  }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
   }
 
   calculateLatsFetch() {
@@ -27,7 +42,29 @@ class Main extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.innerContainer}>
-          <NavBar />
+          <Modal
+            animationType="fade"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              this.setModalVisible(!this.state.modalVisible);
+            }}
+          >
+            <View style={{ marginTop: 22 }}>
+              <View>
+                <Text>Hello World!</Text>
+
+                <TouchableHighlight
+                  onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}
+                >
+                  <Text>Hide Modal</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
+          <NavBar openModal={() => this.setModalVisible()}/>
           <Feed />
           <Text>Last update: {this.calculateLatsFetch()}</Text>
         </View>
