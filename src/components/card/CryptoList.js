@@ -66,7 +66,10 @@ const styles = StyleSheet.create({
     color: "green"
   },
   buttonStyleBuy: {
+    alignItems: 'center',
+    justifyContent: 'center',
     width: "30%",
+    height: 35,
     borderWidth: 1,
     borderRadius: 5,
     backgroundColor: 'green',
@@ -74,7 +77,10 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   buttonStyleSell: {
+    alignItems: 'center',
+    justifyContent: 'center',
     width: "30%",
+    height: 35,
     borderWidth: 1,
     borderRadius: 5,
     backgroundColor: 'red',
@@ -82,7 +88,6 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   buttonText: {
-    alignSelf: "center",
     color: 'white'
   }
 });

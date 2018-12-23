@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
-    shadowRadius: 2
+    shadowRadius: 2,
+    elevation: 3
   },
   buttonStyle: {
     justifyContent: "center",
@@ -75,7 +76,8 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
-    shadowRadius: 2
+    shadowRadius: 2,
+    elevation: 3
   },
   text: {
     color: "white"

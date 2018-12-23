@@ -9,20 +9,13 @@ import {
 } from "react-native";
 import NavBar from "./components/NavBar";
 import Feed from "./components/feed/Feed";
+import LoginMod from "./components/modals/Login";
 import { connect } from "react-redux";
-import { countdown } from "./redux/actions/index";
+import { countdown, openModal, closeModal } from "./redux/actions/index";
 
 class Main extends Component {
-  state = {
-    modalVisible: false
-  };
-
   componentWillMount() {
     this.props.countdownAction();
-  }
-
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
   }
 
   calculateLatsFetch() {
@@ -38,21 +31,21 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const { openModal, isModalOpen, closeModal } = this.props
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.innerContainer}>
           <Modal
             animationType="fade"
-            transparent={false}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              this.setModalVisible(!this.state.modalVisible);
-            }}
+            transparent={true}
+            visible={isModalOpen}
+            onRequestClose={() => closeModal()}
           >
-    
+            <LoginMod
+              closeModal={() => closeModal()}
+            />
           </Modal>
-          <NavBar openModal={() => this.setModalVisible()}/>
+          <NavBar openModal={() => openModal()} />
           <Feed />
           <Text>Last update: {this.calculateLatsFetch()}</Text>
         </View>
@@ -75,12 +68,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    countdownNumber: state.feed.countdownNumber
+    countdownNumber: state.feed.countdownNumber,
+    isModalOpen: state.search.isModalOpen
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  countdownAction: () => dispatch(countdown())
+  countdownAction: () => dispatch(countdown()),
+  openModal: () => dispatch(openModal()),
+  closeModal: () => dispatch(closeModal())
 });
 
 export default connect(

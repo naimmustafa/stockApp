@@ -3,3 +3,5 @@ export const FETCH_CRYPTOS = 'FETCH_CRYPTOS';
 export const LOADING_SPINNER = 'LOADING_SPINNER';
 export const REFRESH_CRYPTOS = 'REFRESH_CRYPTOS';
 export const COUNTDOWN = 'COUNTDOWN';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
