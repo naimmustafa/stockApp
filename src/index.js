@@ -10,6 +10,7 @@ import {
 import NavBar from "./components/NavBar";
 import Feed from "./components/feed/Feed";
 import LoginMod from "./components/modals/Login";
+import HomeUserPanel from "./components/home-user-panel/HomeUserPanel";
 import { connect } from "react-redux";
 import { countdown, openModal, closeModal } from "./redux/actions/index";
 
@@ -31,7 +32,7 @@ class Main extends Component {
   }
 
   render() {
-    const { openModal, isModalOpen, closeModal } = this.props
+    const { openModal, isModalOpen, closeModal } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.innerContainer}>
@@ -41,13 +42,14 @@ class Main extends Component {
             visible={isModalOpen}
             onRequestClose={() => closeModal()}
           >
-            <LoginMod
-              closeModal={() => closeModal()}
-            />
+            <LoginMod closeModal={() => closeModal()} />
           </Modal>
           <NavBar openModal={() => openModal()} />
+          <HomeUserPanel />
           <Feed />
-          <Text>Last update: {this.calculateLatsFetch()}</Text>
+          <View style={styles.update}>
+            <Text>Last update: {this.calculateLatsFetch()}</Text>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -63,6 +65,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#FFFFFF"
+  },
+  update: {
+    borderTopWidth: 1
   }
 });
 
