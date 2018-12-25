@@ -19,7 +19,7 @@ class NavBar extends Component {
     return (
       <View style={styles.searchContainer}>
         <TouchableOpacity style={styles.buttonStyle}>
-          <Text style={styles.text}>Menu</Text>
+          <Text style={styles.text}>Assets</Text>
         </TouchableOpacity>
 
         <TextInput
@@ -33,7 +33,7 @@ class NavBar extends Component {
           style={styles.buttonStyle}
           onPress={() => this.props.openModal()}
         >
-          <Text style={styles.text}>Log in</Text>
+          <Text style={styles.text}>Menu</Text>
         </TouchableOpacity>
       </View>
     );

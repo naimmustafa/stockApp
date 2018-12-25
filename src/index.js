@@ -32,7 +32,7 @@ class Main extends Component {
   }
 
   render() {
-    const { openModal, isModalOpen, closeModal } = this.props;
+    const { openModal, isModalOpen, closeModal, assets } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.innerContainer}>
@@ -45,7 +45,7 @@ class Main extends Component {
             <LoginMod closeModal={() => closeModal()} />
           </Modal>
           <NavBar openModal={() => openModal()} />
-          <HomeUserPanel />
+          <HomeUserPanel assets={assets} />
           <Feed />
           <View style={styles.update}>
             <Text>Last update: {this.calculateLatsFetch()}</Text>
