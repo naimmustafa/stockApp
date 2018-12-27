@@ -16,24 +16,18 @@ export const buyAssets = (amount, currency, symbol, assets) => {
     }, []);
   };
   return dispatch => {
-    if (assets.length > 0) {
-        if (assets.some(asset => asset.symbol === obj.symbol)) {
-          dispatch({
-            type: "BUY_SAME_ASSETS",
-            assets: reducedAssets(assets, obj)
-          });
-        } else {
-          dispatch({
-            type: "BUY_ASSETS",
-            payload: obj
-          });
-        }
-
+    console.log(reducedAssets(assets, obj))
+    if (assets.some(asset => asset.symbol === obj.symbol)) {
+      dispatch({
+        type: "BUY_SAME_ASSETS",
+        assets: reducedAssets(assets, obj)
+      });
+    } else {
+      dispatch({
+        type: "BUY_ASSETS",
+        payload: obj
+      });
     }
-    dispatch({
-      type: "BUY_ASSETS",
-      payload: obj
-    });
   };
 };
 
