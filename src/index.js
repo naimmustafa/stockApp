@@ -45,7 +45,7 @@ class Main extends Component {
             <LoginMod closeModal={() => closeModal()} />
           </Modal>
           <NavBar openModal={() => openModal()} />
-          <HomeUserPanel assets={assets} />
+          <HomeUserPanel />
           <Feed />
           <View style={styles.update}>
             <Text>Last update: {this.calculateLatsFetch()}</Text>
