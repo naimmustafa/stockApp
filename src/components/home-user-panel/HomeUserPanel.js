@@ -23,7 +23,6 @@ class HomeUserPanel extends Component {
 
   render() {
     const { assets } = this.props;
-    console.log(this.renderAssets());
     return (
       <View style={styles.userPanel}>
         <Text>

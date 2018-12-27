@@ -35,7 +35,6 @@ class CryptoList extends Component {
 
   render() {
     const { crypto, buyAssets } = this.props;
-    console.log(this.props.buyAssets);
     return (
       <Card>
         <CardSection>
@@ -119,8 +118,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  buyAssets: (amount, currency, symbol) =>
-    dispatch(buyAssets(amount, currency, symbol))
+  buyAssets: (amount, currency, symbol, assets) =>
+    dispatch(buyAssets(amount, currency, symbol, assets))
 });
 
 export default connect(
