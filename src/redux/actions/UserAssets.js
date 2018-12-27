@@ -1,18 +1,19 @@
-import {
-    BUY_ASSETS,
-    SELL_ASSETS
-  } from './types';
+import { BUY_ASSETS, GET_MONEY } from "./types";
 
-export const buyAssets = (amount, currency) => {
+export const buyAssets = (amount, currency, symbol) => {
   return {
-    type: 'BUY_ASSETS',
-    payload: amount / currency
+    type: "BUY_ASSETS",
+    payload: {
+      symbol: symbol.slice(0, -4),
+      value: (amount / currency).toFixed(5),
+      amount: Number(amount)
+    }
   };
 };
 
-export const sellAssets = (amount, currency) => {
+export const getMoney = amount => {
   return {
-    type: 'BUY_ASSETS',
-    payload: amount / currency
+    type: "GET_MONEY",
+    payload: amount
   };
 };

@@ -6,4 +6,4 @@ export const COUNTDOWN = 'COUNTDOWN';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const BUY_ASSETS = 'BUY_ASSETS';
-export const SELL_ASSETS = 'SELL_ASSETS';
+export const GET_MONEY = 'GET_MONEY';

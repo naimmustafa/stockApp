@@ -6,6 +6,8 @@ import {
   TouchableOpacity
 } from "react-native";
 import Card from "./Card";
+import { connect } from "react-redux";
+import { buyAssets } from "../../redux/actions/index";
 
 import CardSection from "./CardSection";
 
@@ -19,7 +21,8 @@ class CryptoList extends Component {
   }
 
   render() {
-    const { crypto } = this.props;
+    const { crypto, buyAssets } = this.props;
+    console.log(this.props.buyAssets);
     return (
       <Card>
         <CardSection>
@@ -42,7 +45,10 @@ class CryptoList extends Component {
         </CardSection>
 
         <CardSection>
-          <TouchableOpacity style={styles.buttonStyleBuy}>
+          <TouchableOpacity
+            style={styles.buttonStyleBuy}
+            onPress={() => buyAssets(100, crypto.latestPrice, crypto.symbol)}
+          >
             <Text style={styles.buttonText}>Buy</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonStyleSell}>
@@ -66,30 +72,44 @@ const styles = StyleSheet.create({
     color: "green"
   },
   buttonStyleBuy: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     width: "30%",
     height: 35,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'green',
+    backgroundColor: "green",
     marginLeft: 10,
     marginRight: 10
   },
   buttonStyleSell: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     width: "30%",
     height: 35,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'red',
+    backgroundColor: "red",
     marginLeft: 10,
     marginRight: 10
   },
   buttonText: {
-    color: 'white'
+    color: "white"
   }
 });
 
-export default CryptoList;
+const mapStateToProps = state => {
+  return {
+    cryptos: state.feed.cryptos
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  buyAssets: (amount, currency, symbol) =>
+    dispatch(buyAssets(amount, currency, symbol))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CryptoList);

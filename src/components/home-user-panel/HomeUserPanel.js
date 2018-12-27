@@ -1,19 +1,24 @@
 import React, { Component } from "react";
 import { View, Style, StyleSheet, Text, ScrollView } from "react-native";
 import { connect } from "react-redux";
+import { getMoney } from "../../redux/actions/index";
 import CardSection from "../card/CardSection";
 
 class HomeUserPanel extends Component {
   renderAssets() {
     const { assets } = this.props;
-    return assets.assets.map(asset => (
-      <Text key={asset.symbol}>
-        <Text style={{ fontWeight: "bold", color: "black" }}>
-          {asset.symbol}:
-        </Text>{" "}
-        {asset.value}{" "}
-      </Text>
-    ));
+    if (assets.assets.length < 1) {
+      return <Text>There are no assets</Text>;
+    } else {
+      return assets.assets.map(asset => (
+        <Text key={asset.symbol}>
+          <Text style={{ fontWeight: "bold", color: "black" }}>
+            {asset.symbol}:
+          </Text>{" "}
+          {asset.value}{" "}
+        </Text>
+      ));
+    }
   }
 
   render() {
@@ -24,7 +29,7 @@ class HomeUserPanel extends Component {
         <Text>
           Budget: <Text>{assets.money}</Text>$
         </Text>
-        <View style={{width: '70%', flexDirection: 'row'}}>
+        <View style={{ width: "70%", flexDirection: "row" }}>
           <Text>Assets: </Text>
           <ScrollView horizontal style={styles.assets}>
             {this.renderAssets()}
@@ -43,9 +48,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingLeft: 15,
     paddingRight: 15,
-    alignItems: 'center',
-    height: '5%',
-    backgroundColor: 'aqua'
+    alignItems: "center",
+    height: "5%",
+    backgroundColor: "aqua"
   },
   assets: {
     flexDirection: "row"
@@ -61,12 +66,11 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = dispatch => ({
-//   getCryptos: text => dispatch(getCryptos(text)),
-//   refreshCryptos: () => dispatch(refreshCryptos())
-// });
+const mapDispatchToProps = dispatch => ({
+  getMoney: amount => dispatch(getMoney(amount))
+});
 
 export default connect(
   mapStateToProps,
-  {}
+  mapDispatchToProps
 )(HomeUserPanel);

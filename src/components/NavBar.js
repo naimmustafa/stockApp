@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
-import { searchText } from "../redux/actions/index";
+import { searchText, getMoney } from "../redux/actions/index";
 
 class NavBar extends Component {
   onTextChange(text) {
@@ -18,8 +18,11 @@ class NavBar extends Component {
   render() {
     return (
       <View style={styles.searchContainer}>
-        <TouchableOpacity style={styles.buttonStyle}>
-          <Text style={styles.text}>Assets</Text>
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => this.props.getMoney(1000)}
+        >
+          <Text style={styles.text}>Add 1,000$</Text>
         </TouchableOpacity>
 
         <TextInput
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     justifyContent: "center",
-    width: 50,
+    width: 80,
     height: 35,
     alignItems: "center",
     borderRadius: 15,
@@ -91,7 +94,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  searchText: text => dispatch(searchText(text))
+  searchText: text => dispatch(searchText(text)),
+  getMoney: amount => dispatch(getMoney(amount))
 });
 
 export default connect(
