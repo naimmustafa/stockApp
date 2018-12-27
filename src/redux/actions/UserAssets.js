@@ -1,8 +1,6 @@
 import { BUY_ASSETS, GET_MONEY } from "./types";
-import { Alert } from "react-native";
 
 export const buyAssets = (amount, currency, symbol, assets) => {
-  console.log("hey its me mario", assets);
   const obj = {
     symbol: symbol.slice(0, -4),
     value: (amount / currency).toFixed(5),
@@ -16,21 +14,17 @@ export const buyAssets = (amount, currency, symbol, assets) => {
       return [...all, next];
     }, []);
   };
-  return () => {
-    if (assets.length > 1) {
-      return {
+  return dispatch => {
+    if (assets.length > 0) {
+      dispatch({
         type: "BUY_ASSETS",
         assets: reducedAssets(assets, obj)
-      };
+      });
     }
-    return {
+    dispatch({
       type: "BUY_ASSETS",
-      payload: {
-        symbol: symbol.slice(0, -4),
-        value: (amount / currency).toFixed(5),
-        amount: Number(amount)
-      }
-    };
+      payload: obj
+    });
   };
 };
 
