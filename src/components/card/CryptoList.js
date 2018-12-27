@@ -3,7 +3,8 @@ import {
   Text,
   ActivityIndicator,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import Card from "./Card";
 import { connect } from "react-redux";
@@ -18,6 +19,18 @@ class CryptoList extends Component {
       return styles.decreaseText;
     }
     return styles.increaseText;
+  }
+
+  handleBuying() {
+    const { buyAssets, assets, crypto } = this.props;
+    const amount = 120
+    if (assets.money < amount) {
+      return Alert.alert(
+        "You dont have enough money",
+        "Please add more money to buy crypto"
+      );
+    }
+    return buyAssets(amount, crypto.latestPrice, crypto.symbol, assets.assets);
   }
 
   render() {
@@ -47,7 +60,7 @@ class CryptoList extends Component {
         <CardSection>
           <TouchableOpacity
             style={styles.buttonStyleBuy}
-            onPress={() => buyAssets(100, crypto.latestPrice, crypto.symbol)}
+            onPress={() => this.handleBuying()}
           >
             <Text style={styles.buttonText}>Buy</Text>
           </TouchableOpacity>
@@ -100,7 +113,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    cryptos: state.feed.cryptos
+    cryptos: state.feed.cryptos,
+    assets: state.assets
   };
 };
 
