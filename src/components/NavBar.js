@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Picker
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -18,13 +19,22 @@ class NavBar extends Component {
   render() {
     return (
       <View style={styles.searchContainer}>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => this.props.getMoney(1000)}
-        >
-          <Text style={styles.text}>Add 1,000$</Text>
-        </TouchableOpacity>
-
+        <View style={styles.buttonStyle}>
+          <Picker
+            selectedValue={this.props.value}
+            mode={'dropdown'}
+            style={{ height: 50, width: 100, color: "white", flexWrap: 'wrap' }}
+            onValueChange={itemValue => this.props.getMoney(itemValue)}
+          >
+            <Picker.Item label="Add Money" value={this.props.value} />
+            <Picker.Item label="10$" value={10} />
+            <Picker.Item label="50$" value={50} />
+            <Picker.Item label="100$" value={100} />
+            <Picker.Item label="500$" value={500} />
+            <Picker.Item label="1,000$" value={1000} />
+            <Picker.Item label="5,000$" value={5000} />
+          </Picker>
+        </View>
         <TextInput
           placeholder="Search..."
           style={styles.TextInput}
@@ -59,9 +69,8 @@ const styles = StyleSheet.create({
   TextInput: {
     fontSize: 15,
     textAlign: "center",
-    margin: 10,
     backgroundColor: "#ffffff",
-    width: "55%",
+    width: "40%",
     padding: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -71,7 +80,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     justifyContent: "center",
-    width: 80,
+    width: "25%",
     height: 35,
     alignItems: "center",
     borderRadius: 15,
@@ -89,7 +98,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    search: state.search.search
+    search: state.search.search,
+    value: state.assets.value
   };
 };
 

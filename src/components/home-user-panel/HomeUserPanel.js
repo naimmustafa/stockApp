@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getMoney } from "../../redux/actions/index";
 import CardSection from "../card/CardSection";
 
+
 class HomeUserPanel extends Component {
   renderAssets() {
     const { assets } = this.props;
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     alignItems: "center",
-    height: "5%",
+    height: 40,
     backgroundColor: "aqua"
   },
   assets: {

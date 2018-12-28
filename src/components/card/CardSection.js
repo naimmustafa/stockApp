@@ -11,6 +11,7 @@ const styles = {
     borderBottomWidth: 1,
     backgroundColor: '#EDFFED',
     justifyContent: "center",
+    alignItems: 'center',
     flexDirection: "row",
     borderColor: "black",
     position: "relative"
