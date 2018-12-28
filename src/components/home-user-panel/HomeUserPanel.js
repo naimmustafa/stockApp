@@ -27,9 +27,9 @@ class HomeUserPanel extends Component {
     return (
       <View style={styles.userPanel}>
         <Text>
-          Budget: <Text>{assets.money}</Text>$
+          Budget: <Text>{assets.money.toFixed(3)}</Text>$
         </Text>
-        <View style={{ width: "70%", flexDirection: "row" }}>
+        <View style={{ width: "65%", flexDirection: "row" }}>
           <Text>Assets: </Text>
           <ScrollView horizontal style={styles.assets}>
             {this.renderAssets()}

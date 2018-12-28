@@ -23,10 +23,10 @@ class NavBar extends Component {
           <Picker
             selectedValue={this.props.value}
             mode={'dropdown'}
-            style={{ height: 50, width: 100, color: "white", flexWrap: 'wrap' }}
+            style={{ width: '100%', color: "white"}}
             onValueChange={itemValue => this.props.getMoney(itemValue)}
           >
-            <Picker.Item label="Add Money" value={this.props.value} />
+            <Picker.Item label="+$" value={this.props.value} />
             <Picker.Item label="10$" value={10} />
             <Picker.Item label="50$" value={50} />
             <Picker.Item label="100$" value={100} />

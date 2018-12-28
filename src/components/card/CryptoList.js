@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Card from "./Card";
 import { connect } from "react-redux";
-import { buyAssets } from "../../redux/actions/index";
+import { buyAssets, sellAssets } from "../../redux/actions/index";
 
 import CardSection from "./CardSection";
 
@@ -23,7 +23,7 @@ class CryptoList extends Component {
 
   handleBuying() {
     const { buyAssets, assets, crypto } = this.props;
-    const amount = 120
+    const amount = 120;
     if (assets.money < amount) {
       return Alert.alert(
         "You dont have enough money",
@@ -31,6 +31,11 @@ class CryptoList extends Component {
       );
     }
     return buyAssets(amount, crypto.latestPrice, crypto.symbol, assets.assets);
+  }
+
+  handleSelling() {
+    const { sellAssets, assets, crypto } = this.props;
+    return sellAssets(crypto.latestPrice, crypto.symbol, assets.assets);
   }
 
   render() {
@@ -63,7 +68,10 @@ class CryptoList extends Component {
           >
             <Text style={styles.buttonText}>Buy</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonStyleSell}>
+          <TouchableOpacity
+            style={styles.buttonStyleSell}
+            onPress={() => this.handleSelling()}
+          >
             <Text style={styles.buttonText}>Sell</Text>
           </TouchableOpacity>
         </CardSection>
@@ -119,7 +127,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   buyAssets: (amount, currency, symbol, assets) =>
-    dispatch(buyAssets(amount, currency, symbol, assets))
+    dispatch(buyAssets(amount, currency, symbol, assets)),
+  sellAssets: (currency, symbol, assets) =>
+    dispatch(sellAssets(currency, symbol, assets))
 });
 
 export default connect(

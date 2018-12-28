@@ -1,7 +1,7 @@
-import { BUY_ASSETS, GET_MONEY, BUY_SAME_ASSETS } from "./types";
+import { BUY_ASSETS, GET_MONEY, BUY_SAME_ASSETS, SELL_ASSETS } from "./types";
+import { Alert } from "react-native";
 
 export const buyAssets = (amount, currency, symbol, assets) => {
-  console.log(assets);
   const obj = {
     symbol: symbol.slice(0, -4),
     value: Number((amount / currency).toFixed(5)),
@@ -22,7 +22,6 @@ export const buyAssets = (amount, currency, symbol, assets) => {
     }, []);
   };
   return dispatch => {
-    console.log("Im from action", reducedAssets(assets, obj));
     if (assets.some(asset => asset.symbol === obj.symbol)) {
       dispatch({
         type: "BUY_SAME_ASSETS",
@@ -45,5 +44,29 @@ export const getMoney = amount => {
   return {
     type: "GET_MONEY",
     payload: amount
+  };
+};
+
+export const sellAssets = (currency, symbol, assets) => {
+  const selectedAsset = assets.filter(
+    asset => asset.symbol == symbol.slice(0, -4)
+  );
+  const newAssets = assets.filter(asset => !selectedAsset.includes(asset));
+
+  return dispatch => {
+    if (selectedAsset.length === 1) {
+      dispatch({
+        type: "SELL_ASSETS",
+        payload: {
+          money: Number((selectedAsset[0].value * currency).toFixed(4)),
+          assets: newAssets
+        }
+      });
+    } else {
+      Alert.alert(
+        "You dont have any coin",
+        "Buy some crypto currency to sell and make some profit!"
+      );
+    }
   };
 };

@@ -2,13 +2,14 @@ import {
   GET_MONEY,
   BUY_ASSETS,
   BUY_SAME_ASSETS,
-  BUYING_VOLUME
+  BUYING_VOLUME,
+  SELL_ASSETS
 } from "../actions/types";
 
 const INITIAL_STATE = {
   money: 0,
   assets: [],
-  value: 'Add Money'
+  value: "+$"
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,7 +29,13 @@ export default (state = INITIAL_STATE, action) => {
     case GET_MONEY:
       return {
         ...state,
-        money: state.money + action.payload,
+        money: state.money + action.payload
+      };
+    case SELL_ASSETS:
+      return {
+        ...state,
+        money: state.money + action.payload.money,
+        assets: action.payload.assets
       };
     default:
       return state;
