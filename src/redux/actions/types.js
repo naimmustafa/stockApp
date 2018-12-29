@@ -11,3 +11,4 @@ export const BUY_ASSETS = "BUY_ASSETS";
 export const BUY_SAME_ASSETS = "BUY_SAME_ASSETS";
 export const GET_MONEY = "GET_MONEY";
 export const SELL_ASSETS = "SELL_ASSETS";
+export const GET_USER_ASSETS = "GET_USER_ASSETS";

@@ -23,7 +23,7 @@ class CryptoList extends Component {
 
   handleBuying() {
     const { buyAssets, assets, crypto } = this.props;
-    const amount = 120;
+    const amount = 50;
     if (assets.money < amount) {
       return Alert.alert(
         "You dont have enough money",

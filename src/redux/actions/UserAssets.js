@@ -1,5 +1,11 @@
-import { BUY_ASSETS, GET_MONEY, BUY_SAME_ASSETS, SELL_ASSETS } from "./types";
-import { Alert } from "react-native";
+import {
+  BUY_ASSETS,
+  GET_MONEY,
+  BUY_SAME_ASSETS,
+  SELL_ASSETS,
+  GET_USER_ASSETS
+} from "./types";
+import { Alert, AsyncStorage } from "react-native";
 
 export const buyAssets = (amount, currency, symbol, assets) => {
   const obj = {
@@ -14,7 +20,8 @@ export const buyAssets = (amount, currency, symbol, assets) => {
           ...all,
           {
             ...obj,
-            value: (Number(obj["value"]) + Number(next["value"])).toFixed(5)
+            value: (Number(obj["value"]) + Number(next["value"])).toFixed(5),
+            amount: Number(obj["amount"]) + Number(next["amount"])
           }
         ];
       }
@@ -69,4 +76,33 @@ export const sellAssets = (currency, symbol, assets) => {
       );
     }
   };
+};
+
+export const saveAsyncStorage = (assets, money) => async () => {
+  try {
+    await Promise.all(
+      [AsyncStorage.setItem("AssetsStore", JSON.stringify(assets))],
+      [AsyncStorage.setItem("MoneyStore", JSON.stringify(money))]
+    );
+  } catch (error) {
+    // fail silently
+  }
+};
+
+export const getAsyncStorage = () => async dispatch => {
+  try {
+    const asset = await AsyncStorage.getItem("AssetsStore");
+    const money = await AsyncStorage.getItem("MoneyStore");
+    console.log(money);
+    if (money === null) {
+      console.log("nothing");
+    } else {
+      dispatch({
+        type: "GET_USER_ASSETS",
+        payload: { assets: JSON.parse(asset), money: JSON.parse(money) }
+      });
+    }
+  } catch (error) {
+    // fail silently
+  }
 };

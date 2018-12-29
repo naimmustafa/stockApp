@@ -17,7 +17,13 @@ class Feed extends Component {
   }
 
   renderCryptoList() {
-    return this.props.cryptos.map(crypto => (
+    const { cryptos, searchText } = this.props;
+    const searchTextCapital = searchText.toUpperCase();
+    const re = new RegExp(searchTextCapital, "g");
+    const searchResult = cryptos.filter(crypto =>
+      crypto.companyName.toUpperCase().match(re)
+    );
+    return searchResult.map(crypto => (
       <CryptoList key={crypto.symbol} crypto={crypto} />
     ));
   }
@@ -33,7 +39,7 @@ class Feed extends Component {
       );
     }
     return (
-      <ScrollView style={styles.feedContainer}  >
+      <ScrollView style={styles.feedContainer}>
         <Text style={styles.textStyle}>Crypto Currencies</Text>
         {this.renderCryptoList()}
       </ScrollView>
@@ -68,7 +74,8 @@ const mapStateToProps = state => {
   return {
     cryptos: state.feed.cryptos,
     text: state.feed.text,
-    loading: state.feed.loading
+    loading: state.feed.loading,
+    searchText: state.search.search
   };
 };
 

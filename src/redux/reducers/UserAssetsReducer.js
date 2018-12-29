@@ -3,7 +3,8 @@ import {
   BUY_ASSETS,
   BUY_SAME_ASSETS,
   BUYING_VOLUME,
-  SELL_ASSETS
+  SELL_ASSETS,
+  GET_USER_ASSETS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -37,6 +38,12 @@ export default (state = INITIAL_STATE, action) => {
         money: state.money + action.payload.money,
         assets: action.payload.assets
       };
+    case GET_USER_ASSETS:
+      return {
+        ...state,
+        assets: action.payload.assets,
+        money: action.payload.money
+      }
     default:
       return state;
   }

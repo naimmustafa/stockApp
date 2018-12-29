@@ -12,11 +12,17 @@ import Feed from "./components/feed/Feed";
 import LoginMod from "./components/modals/Login";
 import HomeUserPanel from "./components/home-user-panel/HomeUserPanel";
 import { connect } from "react-redux";
-import { countdown, openModal, closeModal } from "./redux/actions/index";
+import {
+  countdown,
+  openModal,
+  closeModal,
+  getAsyncStorage
+} from "./redux/actions/index";
 
 class Main extends Component {
   componentWillMount() {
     this.props.countdownAction();
+    this.props.getAsyncStorage();
   }
 
   calculateLatsFetch() {
@@ -81,7 +87,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   countdownAction: () => dispatch(countdown()),
   openModal: () => dispatch(openModal()),
-  closeModal: () => dispatch(closeModal())
+  closeModal: () => dispatch(closeModal()),
+  getAsyncStorage: () => dispatch(getAsyncStorage())
 });
 
 export default connect(

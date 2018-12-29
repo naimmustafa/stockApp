@@ -9,11 +9,20 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
-import { searchText, getMoney } from "../redux/actions/index";
+import {
+  searchText,
+  getMoney,
+  saveAsyncStorage
+} from "../redux/actions/index";
 
 class NavBar extends Component {
   onTextChange(text) {
     this.props.searchText(text);
+  }
+
+  saveAsyncStorageFunc() {
+    const { assets, saveAsyncStorage, money } = this.props;
+    saveAsyncStorage(assets, money);
   }
 
   render() {
@@ -22,11 +31,11 @@ class NavBar extends Component {
         <View style={styles.buttonStyle}>
           <Picker
             selectedValue={this.props.value}
-            mode={'dropdown'}
-            style={{ width: '100%', color: "white"}}
+            mode={"dropdown"}
+            style={{ width: 150, color: "white", marginLeft: 50 }}
             onValueChange={itemValue => this.props.getMoney(itemValue)}
           >
-            <Picker.Item label="+$" value={this.props.value} />
+            <Picker.Item label="Add Money" value={this.props.value} />
             <Picker.Item label="10$" value={10} />
             <Picker.Item label="50$" value={50} />
             <Picker.Item label="100$" value={100} />
@@ -46,7 +55,7 @@ class NavBar extends Component {
           style={styles.buttonStyle}
           onPress={() => this.props.openModal()}
         >
-          <Text style={styles.text}>Menu</Text>
+            <Text style={styles.text}>Portfolio</Text>
         </TouchableOpacity>
       </View>
     );
@@ -92,20 +101,24 @@ const styles = StyleSheet.create({
     elevation: 3
   },
   text: {
-    color: "white"
+    color: "white",
+    fontSize: 15
   }
 });
 
 const mapStateToProps = state => {
   return {
     search: state.search.search,
-    value: state.assets.value
+    value: state.assets.value,
+    assets: state.assets.assets,
+    money: state.assets.money
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   searchText: text => dispatch(searchText(text)),
-  getMoney: amount => dispatch(getMoney(amount))
+  getMoney: amount => dispatch(getMoney(amount)),
+  saveAsyncStorage: (assets, money) => dispatch(saveAsyncStorage(assets, money))
 });
 
 export default connect(

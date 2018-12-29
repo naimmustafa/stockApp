@@ -12,7 +12,8 @@ const LoginMod = ({ closeModal }) => {
   return (
     <View style={styles.flex}>
       <ScrollView style={styles.container}>
-        <Text style={styles.text}>Do you have an account?</Text>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.text}>All assets</Text>
         <TextInput style={styles.textInput} placeholder="email@example.com" />
         <TextInput
           style={styles.textInput}
@@ -37,8 +38,9 @@ const LoginMod = ({ closeModal }) => {
           secureTextEntry={true}
         />
         <TouchableHighlight onPress={closeModal} style={styles.button}>
-          <Text style={styles.buttonText}>Sing Up</Text>
+           <Text style={styles.buttonText}>Sing Up</Text>
         </TouchableHighlight>
+        </View>
       </ScrollView>
     </View>
   );
@@ -51,13 +53,16 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "black",
-    fontSize: 20
+    fontSize: 20,
+    marginTop: 20
   },
   button: {
     borderRadius: 5,
     backgroundColor: "green",
     marginTop: 10,
-    width: "20%",
+    width: "30%",
+    height: 40,
+    justifyContent: 'center',
     alignItems: "center"
   },
   buttonText: {
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     width: "50%",
-    fontSize: 12
+    fontSize: 15
   }
 });
 
