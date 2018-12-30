@@ -30,12 +30,18 @@ class CryptoList extends Component {
         "Please add more money to buy crypto"
       );
     }
-    return buyAssets(amount, crypto.latestPrice, crypto.symbol, assets.assets);
+    return buyAssets(
+      amount,
+      crypto.latestPrice,
+      crypto.symbol,
+      assets.assets,
+      assets.money
+    );
   }
 
   handleSelling() {
     const { sellAssets, assets, crypto } = this.props;
-    return sellAssets(crypto.latestPrice, crypto.symbol, assets.assets);
+    return sellAssets(crypto.latestPrice, crypto.symbol, assets.assets, assets.money);
   }
 
   render() {
@@ -126,10 +132,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  buyAssets: (amount, currency, symbol, assets) =>
-    dispatch(buyAssets(amount, currency, symbol, assets)),
-  sellAssets: (currency, symbol, assets) =>
-    dispatch(sellAssets(currency, symbol, assets))
+  buyAssets: (amount, currency, symbol, assets, money) =>
+    dispatch(buyAssets(amount, currency, symbol, assets, money)),
+  sellAssets: (currency, symbol, assets, money) =>
+    dispatch(sellAssets(currency, symbol, assets, money))
 });
 
 export default connect(

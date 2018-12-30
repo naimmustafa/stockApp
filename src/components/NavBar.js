@@ -9,20 +9,18 @@ import {
 } from "react-native";
 
 import { connect } from "react-redux";
-import {
-  searchText,
-  getMoney,
-  saveAsyncStorage
-} from "../redux/actions/index";
+import { searchText, getMoney, saveAsyncStorage } from "../redux/actions/index";
 
 class NavBar extends Component {
   onTextChange(text) {
     this.props.searchText(text);
   }
 
-  saveAsyncStorageFunc() {
-    const { assets, saveAsyncStorage, money } = this.props;
-    saveAsyncStorage(assets, money);
+  getMoneyPicker(itemValue) {
+    const { assets, saveAsyncStorage, money, getMoney } = this.props;
+    const savedMoney = money + itemValue;
+    saveAsyncStorage(assets, savedMoney);
+    getMoney(itemValue);
   }
 
   render() {
@@ -32,10 +30,10 @@ class NavBar extends Component {
           <Picker
             selectedValue={this.props.value}
             mode={"dropdown"}
-            style={{ width: 150, color: "white", marginLeft: 50 }}
-            onValueChange={itemValue => this.props.getMoney(itemValue)}
+            style={{ width: 150, color: "white", marginLeft: 75 }}
+            onValueChange={itemValue => this.getMoneyPicker(itemValue)}
           >
-            <Picker.Item label="Add Money" value={this.props.value} />
+            <Picker.Item label="+Money" value={this.props.value} />
             <Picker.Item label="10$" value={10} />
             <Picker.Item label="50$" value={50} />
             <Picker.Item label="100$" value={100} />
@@ -55,7 +53,7 @@ class NavBar extends Component {
           style={styles.buttonStyle}
           onPress={() => this.props.openModal()}
         >
-            <Text style={styles.text}>Portfolio</Text>
+          <Text style={styles.text}>Portfolio</Text>
         </TouchableOpacity>
       </View>
     );

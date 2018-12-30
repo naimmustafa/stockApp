@@ -18,10 +18,13 @@ class Feed extends Component {
 
   renderCryptoList() {
     const { cryptos, searchText } = this.props;
+    console.log(cryptos);
     const searchTextCapital = searchText.toUpperCase();
     const re = new RegExp(searchTextCapital, "g");
-    const searchResult = cryptos.filter(crypto =>
-      crypto.companyName.toUpperCase().match(re)
+    const searchResult = cryptos.filter(
+      crypto =>
+        crypto.companyName.toUpperCase().match(re) &&
+        crypto.latestPrice !== null
     );
     return searchResult.map(crypto => (
       <CryptoList key={crypto.symbol} crypto={crypto} />

@@ -7,7 +7,8 @@ import {
 } from "./types";
 import { Alert, AsyncStorage } from "react-native";
 
-export const buyAssets = (amount, currency, symbol, assets) => {
+export const buyAssets = (amount, currency, symbol, assets, money) => {
+  const savedMoney = money - amount;
   const obj = {
     symbol: symbol.slice(0, -4),
     value: Number((amount / currency).toFixed(5)),
@@ -34,6 +35,7 @@ export const buyAssets = (amount, currency, symbol, assets) => {
         type: "BUY_SAME_ASSETS",
         payload: { assets: reducedAssets(assets, obj), amount: amount }
       });
+      dispatch(saveAsyncStorage(reducedAssets(assets, obj), savedMoney));
     } else {
       dispatch({
         type: "BUY_ASSETS",
@@ -43,6 +45,8 @@ export const buyAssets = (amount, currency, symbol, assets) => {
           amount: Number(amount)
         }
       });
+      assets.push(obj);
+      dispatch(saveAsyncStorage(assets, savedMoney));
     }
   };
 };
@@ -54,7 +58,7 @@ export const getMoney = amount => {
   };
 };
 
-export const sellAssets = (currency, symbol, assets) => {
+export const sellAssets = (currency, symbol, assets, money) => {
   const selectedAsset = assets.filter(
     asset => asset.symbol == symbol.slice(0, -4)
   );
@@ -69,6 +73,12 @@ export const sellAssets = (currency, symbol, assets) => {
           assets: newAssets
         }
       });
+      dispatch(
+        saveAsyncStorage(
+          newAssets,
+          Number((selectedAsset[0].value * currency).toFixed(4)) + money
+        )
+      );
     } else {
       Alert.alert(
         "You dont have any coin",
